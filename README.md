@@ -57,3 +57,24 @@ cve_fullstack_app
 
     Display all the details of the CVE without having to render ever page beforehand using dynamic routing.
 
+## Screenshots
+
+1. `GET /api?page=1&perPage=10 200 in 2058ms`
+
+![10 rows](images/Pic1.png)
+
+2. `GET /api?page=6&perPage=100 200 in 192ms`
+
+![100 rows](images/Pic2.png)
+
+3. `GET /api?page=13&perPage=100 200 in 21695ms`
+
+![New records loading rows](images/Pic3.png)
+
+4. `GET /api?page=13&perPage=100 200 in 21695ms`
+
+![New rows](images/Pic4.png)
+
+5. `GET /cves/CVE-2000-0356 200 in 1153ms`
+
+![Dedicated Page](images/Pic5.png)
