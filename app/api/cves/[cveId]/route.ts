@@ -2,6 +2,7 @@ import { connectDB } from "@/lib/mongoose";
 import CVE from "@/models/cve";
 import { NextResponse } from "next/server";
 
+// Fetch the details for the CVE with ID == cveId using dynamic routing
 export async function GET(req: Request, { params }: { params: { cveId: string } }) {
     await connectDB();
     try {

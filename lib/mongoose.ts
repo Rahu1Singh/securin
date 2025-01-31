@@ -4,6 +4,7 @@ const uri = "mongodb+srv://srahul1357:ritika123@cve-cluster.xpk9g.mongodb.net/?r
 
 const MONGO_URI = uri || "";
 
+// Connect to the database
 export const connectDB = async () => {
     if (mongoose.connection.readyState >= 1) return;
 

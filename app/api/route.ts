@@ -5,6 +5,7 @@ import axios from "axios";
 
 const API_URL = "https://services.nvd.nist.gov/rest/json/cves/2.0";
 
+// fetch data from the CVE API
 async function fetchAndStoreCVE(startIndex: number, resultsPerPage: number) {
     try {
         const response = await axios.get(`${API_URL}?resultsPerPage=${resultsPerPage}&startIndex=${startIndex}`);
