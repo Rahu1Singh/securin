@@ -8,18 +8,27 @@ export default function Home() {
     const [perPage, setPerPage] = useState(10);
     const [page, setPage] = useState(1);
     const [totalCount, setTotalCount] = useState(0);
+    const [searchID, setSearchID] = useState("");
+    const [minBaseScore, setMinBaseScore] = useState("");
 
     useEffect(() => {
         fetchData();
-    }, [page, perPage]);
+    }, [page, perPage, searchID, minBaseScore]);
 
     const fetchData = async () => {
         setLoading(true);
         try {
-            const res = await fetch(`/api?page=${page}&perPage=${perPage}`);
+            const query = new URLSearchParams({
+                page: page.toString(),
+                perPage: perPage.toString(),
+                search: searchID,
+                minScore: minBaseScore,
+            }).toString();
+
+            const res = await fetch(`/api?${query}`);
             const data = await res.json();
             setCVEs(data.cves);
-            setTotalCount(data.totalCount); // Update total count dynamically
+            setTotalCount(data.totalCount);
         } catch (error) {
             console.error(error);
         }
@@ -31,6 +40,24 @@ export default function Home() {
     return (
         <div className="p-5">
             <h1 className="text-2xl font-bold mb-4">CVE List</h1>
+
+            <div className="mb-4 flex flex-wrap gap-4">
+                <input
+                    type="text"
+                    placeholder="Search by CVE ID or Description"
+                    value={searchID}
+                    onChange={(e) => setSearchID(e.target.value)}
+                    className="border p-2 w-64"
+                />
+                <input
+                    type="number"
+                    placeholder="Min Base Score"
+                    value={minBaseScore}
+                    onChange={(e) => setMinBaseScore(e.target.value)}
+                    className="border p-2 w-40"
+                />
+            </div>
+
             {loading ? <p>Loading...</p> : (
                 <>
                     <table className="table-auto w-full border-collapse border">
