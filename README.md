@@ -59,22 +59,26 @@ cve_fullstack_app
 
 ## Screenshots
 
-1. `GET /api?page=1&perPage=10 200 in 2058ms`
+1. `GET /api?page=1&perPage=10&search=&minScore= 200 in 4522ms`
 
 ![10 rows](images/Pic1.png)
 
-2. `GET /api?page=6&perPage=100 200 in 192ms`
+2. `GET /api?page=3&perPage=100&search=&minScore= 200 in 241ms`
 
 ![100 rows](images/Pic2.png)
 
-3. `GET /api?page=13&perPage=100 200 in 21695ms`
+3. `GET /api?page=1&perPage=10&search=CVE-1999-0957&minScore= 200 in 79ms`
 
-![New records loading rows](images/Pic3.png)
+![ID Search](images/Pic3.png)
 
-4. `GET /api?page=13&perPage=100 200 in 21695ms`
+4. `GET /api?page=1&perPage=10&search=1999&minScore=8 200 in 122ms`
 
-![New rows](images/Pic4.png)
+![Year Search](images/Pic4.png)
 
-5. `GET /cves/CVE-2000-0356 200 in 1153ms`
+5. `GET /api?page=1&perPage=10&search=1999&minScore=7 200 in 86ms`
 
-![Dedicated Page](images/Pic5.png)
+![Score Filter](images/Pic5.png)
+
+6. `GET /api/cves/CVE-1999-1122 200 in 92ms`
+
+![Dedicated Page](images/Pic6.png)
