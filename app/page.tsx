@@ -10,10 +10,11 @@ export default function Home() {
     const [totalCount, setTotalCount] = useState(0);
     const [searchID, setSearchID] = useState("");
     const [minBaseScore, setMinBaseScore] = useState("");
+    const [lastModifiedDate, setLastModifiedDate] = useState("");
 
     useEffect(() => {
         fetchData();
-    }, [page, perPage, searchID, minBaseScore]);
+    }, [page, perPage, searchID, minBaseScore, lastModifiedDate]);
 
     const fetchData = async () => {
         setLoading(true);
@@ -23,6 +24,7 @@ export default function Home() {
                 perPage: perPage.toString(),
                 search: searchID,
                 minScore: minBaseScore,
+                lastModifiedDate: lastModifiedDate,
             }).toString();
 
             const res = await fetch(`/api?${query}`);
@@ -55,6 +57,12 @@ export default function Home() {
                     value={minBaseScore}
                     onChange={(e) => setMinBaseScore(e.target.value)}
                     className="border p-2 w-40"
+                />
+                <input
+                    type="date"
+                    value={lastModifiedDate}
+                    onChange={(e) => setLastModifiedDate(e.target.value)}
+                    className="border p-2 w-48"
                 />
             </div>
 
@@ -100,11 +108,18 @@ export default function Home() {
                         </div>
 
                         <div className="flex items-center">
-                            <button onClick={() => setPage((prev) => Math.max(prev - 1, 1))} disabled={page === 1} className="p-2 bg-gray-200 rounded disabled:opacity-50">
+                            <button 
+                                onClick={() => setPage((prev) => Math.max(prev - 1, 1))} 
+                                disabled={page === 1} 
+                                className="p-2 bg-gray-200 rounded disabled:opacity-50"
+                            >
                                 Prev
                             </button>
                             <span className="mx-2">{page} of {totalPages}</span>
-                            <button onClick={() => setPage((prev) => prev + 1)} className="p-2 bg-gray-200 rounded disabled:opacity-50">
+                            <button 
+                                onClick={() => setPage((prev) => prev + 1)} 
+                                className="p-2 bg-gray-200 rounded disabled:opacity-50"
+                            >
                                 Next
                             </button>
                         </div>

@@ -64,6 +64,7 @@ export async function GET(req: Request) {
     const search = url.searchParams.get("search") || "";
     const year = url.searchParams.get("year");
     const minScore = url.searchParams.get("minScore");
+    const lastModifiedDate = url.searchParams.get("lastModifiedDate")
 
     let filter: any = {};
 
@@ -81,6 +82,10 @@ export async function GET(req: Request) {
     if (minScore) {
         filter.baseScore = {};
         if (minScore) filter.baseScore.$gte = parseFloat(minScore);
+    }
+
+    if (lastModifiedDate) {
+        filter.lastModifiedDate = { $gte: new Date(lastModifiedDate) };
     }
 
     const totalCount = await CVE.countDocuments(filter);
